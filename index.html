@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel meteorológico · Práctica 2 Tema 9</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header class="cabecera">
+    <div class="cabecera__contenido">
+      <div class="cabecera__titulo">
+        <h1>Previsión a 7 días</h1>
+        <p class="cabecera__lugar">
+          Mostrando: <strong id="nombre-localidad">Córdoba</strong>
+        </p>
+      </div>
+
+      <form id="form-busqueda" class="buscador" role="search">
+        <label for="localidad" class="buscador__etiqueta">Buscar localidad</label>
+        <div class="buscador__campos">
+          <input
+            type="search"
+            id="localidad"
+            name="localidad"
+            placeholder="Ej.: Sevilla, Madrid, Lima…"
+            autocomplete="off"
+            required>
+          <button type="submit" id="btn-buscar">Buscar</button>
+        </div>
+      </form>
+    </div>
+  </header>
+
+  <main class="principal">
+
+    <div id="estado" class="estado" role="status" aria-live="polite" hidden>
+      Cargando datos…
+    </div>
+
+    <section class="resumen" aria-labelledby="titulo-resumen">
+      <h2 id="titulo-resumen" class="visualmente-oculto">Resumen de la previsión</h2>
+
+      <div class="indicadores">
+        <article class="indicador indicador--max">
+          <h3>Temperatura máxima</h3>
+          <p class="indicador__valor"><span id="temp-max">--</span><small>°C</small></p>
+          <p class="indicador__detalle" id="temp-max-dia">&nbsp;</p>
+        </article>
+
+        <article class="indicador indicador--min">
+          <h3>Temperatura mínima</h3>
+          <p class="indicador__valor"><span id="temp-min">--</span><small>°C</small></p>
+          <p class="indicador__detalle" id="temp-min-dia">&nbsp;</p>
+        </article>
+
+        <article class="indicador indicador--lluvia">
+          <h3>Precipitación acumulada</h3>
+          <p class="indicador__valor"><span id="precip-total">--</span><small>mm</small></p>
+          <p class="indicador__detalle">Suma de los 7 días</p>
+        </article>
+
+        <article class="indicador indicador--viento">
+          <h3>Viento máximo</h3>
+          <p class="indicador__valor"><span id="viento-max">--</span><small>km/h</small></p>
+          <p class="indicador__detalle" id="viento-max-dia">&nbsp;</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="graficos" aria-labelledby="titulo-graficos">
+      <h2 id="titulo-graficos">Gráficos de la previsión</h2>
+
+      <div class="graficos__rejilla">
+
+        <figure class="grafico">
+          <figcaption>Evolución de las temperaturas</figcaption>
+          <div class="grafico__lienzo">
+            <canvas id="grafico-temperaturas" aria-label="Gráfico de líneas con temperaturas máximas y mínimas" role="img"></canvas>
+          </div>
+        </figure>
+
+        <figure class="grafico">
+          <figcaption>Precipitaciones</figcaption>
+          <div class="grafico__lienzo">
+            <canvas id="grafico-precipitaciones" aria-label="Gráfico de barras con la precipitación diaria" role="img"></canvas>
+          </div>
+        </figure>
+
+        <figure class="grafico">
+          <figcaption>Velocidad máxima del viento</figcaption>
+          <div class="grafico__lienzo">
+            <canvas id="grafico-viento" aria-label="Gráfico de la velocidad máxima del viento por día" role="img"></canvas>
+          </div>
+        </figure>
+
+        <figure class="grafico">
+          <figcaption>Días según el tipo de tiempo</figcaption>
+          <div class="grafico__lienzo">
+            <canvas id="grafico-tiempo" aria-label="Gráfico con el reparto de días según el código meteorológico" role="img"></canvas>
+          </div>
+        </figure>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="pie">
+    <p>
+      Datos de
+      <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+      · Gráficos con
+      <a href="https://www.chartjs.org/" target="_blank" rel="noopener">Chart.js</a>
+    </p>
+    <p>Última consulta: <time id="fecha-consulta">--</time></p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
